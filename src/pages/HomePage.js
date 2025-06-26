@@ -1,65 +1,133 @@
-import React from 'react';
-import logo from '../assets/logo.png'; // 로고 파일 위치에 따라 경로 조정 필요
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+import HeroBanner from '../components/HeroBanner'; // ✅ HeroBanner 추가
 
 function HomePage() {
+  const { t } = useTranslation();
+
+  // ✅ Kakao SDK 초기화
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init('3e6609c629be3ff5bca1d0a2f2116860');
+    }
+  }, []);
+
+  // ✅ 공유 함수
+  const handleShare = () => {
+    if (window.Kakao) {
+      window.Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: 'NINEGO MOTORS',
+          description: '믿고 맡기는 사고차 경매대행',
+          imageUrl: 'https://ninegomotors.com/share-image.jpg',
+          link: {
+            mobileWebUrl: 'https://ninegomotors.com',
+            webUrl: 'https://ninegomotors.com',
+          },
+        },
+        buttons: [
+          {
+            title: '웹사이트 방문하기',
+            link: {
+              mobileWebUrl: 'https://ninegomotors.com',
+              webUrl: 'https://ninegomotors.com',
+            },
+          },
+        ],
+      });
+    }
+  };
+
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-      {/* 상단 배너 */}
-      <div style={{ background: '#000', color: '#fff', padding: '20px', textAlign: 'center' }}>
-        <img src={logo} alt="NINEGO 로고" style={{ height: '80px', marginBottom: '10px' }} />
-        <h1 style={{ fontSize: '24px' }}>NINEGO MOTOSR - 믿고 맡기는 사고차 경매 대행</h1>
+    <div style={{ fontFamily: 'sans-serif', paddingTop: '80px' }}>
+      {/* ✅ 언어 선택 드롭다운 */}
+      <div
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 9999,
+          backgroundColor: '#fff',
+          padding: '8px 12px',
+          borderRadius: '8px',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+        }}
+      >
+        <LanguageSwitcher />
       </div>
 
-      {/* 소개 */}
+      {/* ✅ HeroBanner 이미지 전체 배너로 대체 */}
+      <HeroBanner />
+
+      {/* ✅ 소개 */}
       <section style={{ marginTop: '30px', textAlign: 'center' }}>
-        <h2>사고차 경매 / 수출 대행 전문</h2>
-        <p>카톡으로 상담하고, 원하는 차량 조건만 알려주세요.</p>
+        <h2>{t('specialty')}</h2>
+        <p>{t('consult_guide')}</p>
       </section>
 
-      {/* 간단 상담 폼 */}
-      <section style={{
-        marginTop: '40px',
-        maxWidth: '400px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px'
-      }}>
-        <h3>상담 요청</h3>
-        <input placeholder="이름" style={{ width: '100%', marginBottom: '10px', padding: '10px' }} />
-        <input placeholder="연락처 (전화/카톡)" style={{ width: '100%', marginBottom: '10px', padding: '10px' }} />
-        <textarea placeholder="차량 조건이나 희망사항" style={{ width: '100%', height: '100px', padding: '10px' }} />
-        <button style={{ marginTop: '10px', padding: '10px', width: '100%', background: '#000', color: '#fff' }}>
-          보내기
+      {/* ✅ 상담 폼 */}
+      <section
+        style={{
+          marginTop: '40px',
+          maxWidth: '400px',
+          margin: '0 auto',
+          padding: '20px',
+          border: '1px solid #ccc',
+          borderRadius: '10px',
+        }}
+      >
+        <h3>{t('consult_title')}</h3>
+        <input
+          placeholder={t('name')}
+          style={{ width: '100%', marginBottom: '10px', padding: '10px' }}
+        />
+        <input
+          placeholder={t('contact')}
+          style={{ width: '100%', marginBottom: '10px', padding: '10px' }}
+        />
+        <textarea
+          placeholder={t('requirement')}
+          style={{ width: '100%', height: '100px', padding: '10px' }}
+        />
+        <button
+          style={{
+            marginTop: '10px',
+            padding: '10px',
+            width: '100%',
+            background: '#000',
+            color: '#fff',
+            border: 'none',
+          }}
+        >
+          {t('submit')}
         </button>
       </section>
-{/* 카카오톡 상담 버튼 */}
-<div style={{ textAlign: 'center', marginTop: '40px' }}>
-  <a
-    href="https://open.kakao.com/o/sKZH7LDh" // ← 여기에 본인 채널 주소 넣으세요
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      display: 'inline-block',
-      backgroundColor: '#FEE500',
-      padding: '10px 20px',
-      borderRadius: '20px',
-      color: '#000',
-      fontWeight: 'bold',
-      textDecoration: 'none',
-      boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-    }}
-  >
-    💬 카카오톡 상담하기
-  </a>
-</div>
 
-      {/* 하단 연락처 */}
+      {/* ✅ 카카오톡 공유 버튼 */}
+      <div style={{ textAlign: 'center', marginTop: '30px' }}>
+        <button
+          onClick={handleShare}
+          style={{
+            backgroundColor: '#FEE500',
+            padding: '10px 20px',
+            borderRadius: '20px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            border: 'none',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+          }}
+        >
+          📢 카카오톡으로 공유하기
+        </button>
+      </div>
+
+      {/* ✅ 하단 연락처 */}
       <footer style={{ marginTop: '40px', textAlign: 'center', fontSize: '14px', color: '#666' }}>
-        전화: 010-9138-2775 | FAX: 0504-160-2775<br />
-        카카오톡: @ninego | 주소: 인천 연수구 연수동 556-6, 202호<br />
-        © 2025 NINEGO MOTOSR
+        {t('contact_info')}<br />
+        {t('footer_address')}<br />
+        © 2025 NINEGO MOTORS
       </footer>
     </div>
   );
