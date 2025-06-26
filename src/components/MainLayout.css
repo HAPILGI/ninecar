@@ -1,0 +1,41 @@
+/* src/styles/HeroSection.css */
+.hero-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffd700;
+  padding: 20px 40px;
+}
+
+.hero-left {
+  flex: 0 0 200px;
+}
+
+.hero-center {
+  flex: 1;
+  padding: 0 20px;
+  color: #000;
+}
+
+.hero-center h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.hero-center h2 {
+  font-size: 24px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.hero-center p {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.hero-right img {
+  width: 240px;
+  height: auto;
+  object-fit: contain;
+}

@@ -1,0 +1,45 @@
+/* TopNav.css */
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7c600;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  white-space: nowrap;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 20px;
+  max-width: 500px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.auth-links {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.auth-links a {
+  color: #000;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}

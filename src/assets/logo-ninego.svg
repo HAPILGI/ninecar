@@ -1,0 +1,15 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="400" height="80" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NineGo Motors 로고">
+  <!-- 노란 배경 -->
+  <rect width="400" height="80" fill="#FFD600"></rect>
+
+  <!-- 텍스트: NINEGO -->
+  <text x="20" y="50" font-family="Verdana, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#111">
+    NINEGO
+  </text>
+
+  <!-- 텍스트: MOTORS (조금 작게) -->
+  <text x="215" y="50" font-family="Verdana, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#111">
+    MOTORS
+  </text>
+</svg>
